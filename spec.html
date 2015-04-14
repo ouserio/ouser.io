@@ -1,0 +1,206 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>OUser [working draft v0]</title><link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css"><link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200"><style>pre code{display:block;padding:.5em;color:#333}
+/* Highlight.js Theme Tomorrow */
+.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}</style><style>body,
+h4,
+h5 {
+  font-family: 'Roboto' sans-serif !important;
+}
+h1,
+h2,
+h3,
+.aglio {
+  font-family: 'Raleway' sans-serif !important;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a {
+  display: none;
+}
+h1:hover a,
+h2:hover a,
+h3:hover a,
+h4:hover a,
+h5:hover a {
+  display: inline;
+}
+code {
+  color: #444;
+  background-color: #ddd;
+  font-family: 'Inconsolata' monospace !important;
+}
+a[data-target] {
+  cursor: pointer;
+}
+h4 {
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.back-to-top {
+  position: fixed;
+  z-index: 1;
+  bottom: 0px;
+  right: 24px;
+  padding: 4px 8px;
+  background-color: #eee;
+  text-decoration: none !important;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid rgba(0,0,0,0.1);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.panel {
+  overflow: hidden;
+}
+.panel-heading code {
+  margin-left: 3px;
+  background-color: rgba(255,255,255,0.7);
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.panel-heading h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+a.list-group-item:hover {
+  background-color: #f8f8f8;
+  border-left: 2px solid #555;
+  padding-left: 15px;
+}
+.indent {
+  display: block;
+  text-indent: 16px;
+}
+.list-group-item {
+  padding-left: 16px;
+}
+.list-group-item .toggle .open {
+  display: block;
+}
+.list-group-item .toggle .closed {
+  display: none;
+}
+.list-group-item.collapsed .toggle .open {
+  display: none;
+}
+.list-group-item.collapsed .toggle .closed {
+  display: block;
+}
+a.list-group-item:hover {
+  background-color: #f5f5f5;
+  border-left-color: #555;
+}
+a.list-group-item {
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+a.list-group-item.heading {
+  font-size: 15px;
+  background-color: #ecf0f1;
+}
+a.list-group-item.heading:hover {
+  background-color: #f5f5f5;
+}
+.list-group-item.collapse {
+  display: none;
+}
+.list-group-item.collapse.in {
+  display: block;
+}
+.list-group-item a span.closed {
+  display: none;
+}
+.list-group-item a span.open {
+  display: block;
+}
+.list-group-item a.collapsed span.closed {
+  display: block;
+}
+.list-group-item a.collapsed span.open {
+  display: none;
+}
+#nav {
+  width: inherit;
+  margin-top: 38px;
+  max-width: 255px;
+  top: 0;
+  bottom: 0;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  overflow-y: auto;
+}
+@media (max-width: 1199px) {
+  #nav {
+    max-width: 212px;
+  }
+}
+</style></head><body><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><div class="col-md-3"><nav id="nav" class="hidden-sm hidden-xs affix nav"><div class="list-group"><a data-toggle="" data-target="#initial-menu" href="#initial" class="list-group-item heading collapsed">Initial</a><div id="initial-menu"><a href="#initial-send" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span>Send</a><a href="#initial-login" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span>Login</a></div></div><div class="list-group"><a data-toggle="" data-target="#token-menu" href="#token" class="list-group-item heading collapsed">Token</a><div id="token-menu"><a href="#token-register" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span>Register</a><a href="#token-password-reset" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span>Password Reset</a></div></div><div class="list-group"><a data-toggle="" data-target="#session-menu" href="#session" class="list-group-item heading collapsed">Session</a><div id="session-menu"><a href="#session-refresh" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span>Refresh</a><a href="#session-change-password" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span>Change Password</a><a href="#session-logout" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span>Logout</a></div></div></nav></div><div class="col-md-8"><div><header><div class="page-header"><h1 id="top">OUser [working draft v0]</h1></div></header><div class="description"><p>An open standard for distributed user account registration, session management, and access control.</p>
+</div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="initial">Initial&nbsp;<a href="#initial"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><p>These API calls may be made at any time.</p>
+<h4 id="initial-send">Send&nbsp;<a href="#initial-send"><i class="fa fa-link"></i></a></h4><section id="initial-send-post" class="panel panel-success"><div class="panel-heading"><div style="float:left"><a href="#initial-send-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/v0/send</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>email</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd><dt>type</dt><dd><code>string</code>&nbsp;<span>(optional)</span>&nbsp;</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>202</code></strong><a data-toggle="collapse" data-target="#892fb132a073b920ed1713d3b0adee7d" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="892fb132a073b920ed1713d3b0adee7d" class="list-group-item panel-collapse collapse"><div class="description"><p>Message has been queued for delivery.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>400</code></strong><a data-toggle="collapse" data-target="#5ce573621031338e5c95c5702f601cd7" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="5ce573621031338e5c95c5702f601cd7" class="list-group-item panel-collapse collapse"><div class="description"><p>Missing or incorrect parameter(s).</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>404</code></strong><a data-toggle="collapse" data-target="#2697a138de33dab6e12c2d561be08cad" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="2697a138de33dab6e12c2d561be08cad" class="list-group-item panel-collapse collapse"><div class="description"><p>Given <code>type</code> was not found.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>500</code></strong><a data-toggle="collapse" data-target="#b3818d0257636f13f051d4809dbf8e6e" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="b3818d0257636f13f051d4809dbf8e6e" class="list-group-item panel-collapse collapse"><div class="description"><p>Internal Server Error</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li></ul></section><h4 id="initial-login">Login&nbsp;<a href="#initial-login"><i class="fa fa-link"></i></a></h4><section id="initial-login-post" class="panel panel-success"><div class="panel-heading"><div style="float:left"><a href="#initial-login-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/v0/login</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>email</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd><dt>password</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#79a46e5c7fa7731e28d2e88c8439dbe2" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="79a46e5c7fa7731e28d2e88c8439dbe2" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>    {
+        "<span class="hljs-attribute">loginToken</span>": <span class="hljs-value"><span class="hljs-string">"..."</span>
+    </span>}
+
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>400</code></strong><a data-toggle="collapse" data-target="#d769ecdae69ee29dde259681f8258eb7" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="d769ecdae69ee29dde259681f8258eb7" class="list-group-item panel-collapse collapse"><div class="description"><p>Missing or incorrect parameter(s).</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>401</code></strong><a data-toggle="collapse" data-target="#dafe5411f2b4a5b3fe38726440c36cb1" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="dafe5411f2b4a5b3fe38726440c36cb1" class="list-group-item panel-collapse collapse"><div class="description"><p>Incorrect username or password.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>410</code></strong><a data-toggle="collapse" data-target="#58326872d2015199006ba328f86ba935" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="58326872d2015199006ba328f86ba935" class="list-group-item panel-collapse collapse"><div class="description"><p>Invalid or expired token.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>500</code></strong><a data-toggle="collapse" data-target="#9a200caa88d90c7bee3db1172c49582e" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="9a200caa88d90c7bee3db1172c49582e" class="list-group-item panel-collapse collapse"><div class="description"><p>Internal Server Error</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li></ul></section></div></div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="token">Token&nbsp;<a href="#token"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><p>These API calls may be made once a <code>token</code> has been acquired.</p>
+<h4 id="token-register">Register&nbsp;<a href="#token-register"><i class="fa fa-link"></i></a></h4><section id="token-register-post" class="panel panel-success"><div class="panel-heading"><div style="float:left"><a href="#token-register-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/v0/register</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>Token as delivered via the <code>send</code> API.</p>
+</dd><dt>password</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>Password for this user.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>201</code></strong><a data-toggle="collapse" data-target="#06abc720fae23ad3d1393a808ebff396" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="06abc720fae23ad3d1393a808ebff396" class="list-group-item panel-collapse collapse"><div class="description"><p>Created.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>400</code></strong><a data-toggle="collapse" data-target="#0fec36d00d22cdc21b0a02b8ae75a06b" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="0fec36d00d22cdc21b0a02b8ae75a06b" class="list-group-item panel-collapse collapse"><div class="description"><p>Missing or incorrect parameter(s).</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>409</code></strong><a data-toggle="collapse" data-target="#2a76f2170fff082ba5f5b592ed489d95" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="2a76f2170fff082ba5f5b592ed489d95" class="list-group-item panel-collapse collapse"><div class="description"><p>Conflict; this email address is already registered.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>410</code></strong><a data-toggle="collapse" data-target="#040c4174453016cca21dfd5e3fcff8c6" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="040c4174453016cca21dfd5e3fcff8c6" class="list-group-item panel-collapse collapse"><div class="description"><p>Token is invalid or expired.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>500</code></strong><a data-toggle="collapse" data-target="#4314d6f46b57ead6e36b83850d678f50" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="4314d6f46b57ead6e36b83850d678f50" class="list-group-item panel-collapse collapse"><div class="description"><p>Internal Server Error</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li></ul></section><h4 id="token-password-reset">Password Reset&nbsp;<a href="#token-password-reset"><i class="fa fa-link"></i></a></h4><section id="token-password-reset-post" class="panel panel-success"><div class="panel-heading"><div style="float:left"><a href="#token-password-reset-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/v0/reset_password</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>Token as delivered via the <code>send</code> API.</p>
+</dd><dt>password</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>New password.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>204</code></strong><a data-toggle="collapse" data-target="#35f35a3f090968c2f2099a868f3f5756" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="35f35a3f090968c2f2099a868f3f5756" class="list-group-item panel-collapse collapse"><div class="description"><p>Password changed.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>400</code></strong><a data-toggle="collapse" data-target="#03025222dc31357397cea0c086ccddbc" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="03025222dc31357397cea0c086ccddbc" class="list-group-item panel-collapse collapse"><div class="description"><p>Missing or incorrect parameter(s).</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>410</code></strong><a data-toggle="collapse" data-target="#4458a3ce076d9e65369e2d6b5166bdcb" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="4458a3ce076d9e65369e2d6b5166bdcb" class="list-group-item panel-collapse collapse"><div class="description"><p>Token is invalid or expired.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>500</code></strong><a data-toggle="collapse" data-target="#6413c4aefd7741df0f798aaa04dd5413" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="6413c4aefd7741df0f798aaa04dd5413" class="list-group-item panel-collapse collapse"><div class="description"><p>Internal Server Error</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li></ul></section></div></div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="session">Session&nbsp;<a href="#session"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><p>These API calls may be made once a <code>loginToken</code> has been acquired.</p>
+<h4 id="session-refresh">Refresh&nbsp;<a href="#session-refresh"><i class="fa fa-link"></i></a></h4><section id="session-refresh-post" class="panel panel-success"><div class="panel-heading"><div style="float:left"><a href="#session-refresh-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/v0/refresh</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>loginToken</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>From <code>login</code> or <code>refresh</code> API.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#4c40d3a60c26bc3ac806c2c35444380c" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="4c40d3a60c26bc3ac806c2c35444380c" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>    {
+        "<span class="hljs-attribute">loginToken</span>": <span class="hljs-value"><span class="hljs-string">"..."</span>
+    </span>}
+
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>400</code></strong><a data-toggle="collapse" data-target="#72003dee6ad0764e2d2de8357bf6b8cf" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="72003dee6ad0764e2d2de8357bf6b8cf" class="list-group-item panel-collapse collapse"><div class="description"><p>Missing or incorrect parameter(s).</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>410</code></strong><a data-toggle="collapse" data-target="#28bc63236441ed8011fd128be4ce1eb2" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="28bc63236441ed8011fd128be4ce1eb2" class="list-group-item panel-collapse collapse"><div class="description"><p>Session is invalid or expired.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>500</code></strong><a data-toggle="collapse" data-target="#0d4b2d314e3b1779c78bf9d733861fc8" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="0d4b2d314e3b1779c78bf9d733861fc8" class="list-group-item panel-collapse collapse"><div class="description"><p>Internal Server Error</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li></ul></section><h4 id="session-change-password">Change Password&nbsp;<a href="#session-change-password"><i class="fa fa-link"></i></a></h4><section id="session-change-password-post" class="panel panel-success"><div class="panel-heading"><div style="float:left"><a href="#session-change-password-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/v0/change_password</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>loginToken</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>From <code>login</code> or <code>refresh</code> API.</p>
+</dd><dt>currentPassword</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd><dt>password</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>204</code></strong><a data-toggle="collapse" data-target="#4a782d815cf748c3f2a2187e6bea69a2" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="4a782d815cf748c3f2a2187e6bea69a2" class="list-group-item panel-collapse collapse"><div class="description"><p>Password changed.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>400</code></strong><a data-toggle="collapse" data-target="#1cd8a13f4c6c6685ca72bfd9c1f63bc7" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="1cd8a13f4c6c6685ca72bfd9c1f63bc7" class="list-group-item panel-collapse collapse"><div class="description"><p>Missing or incorrect parameter(s).</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>403</code></strong><a data-toggle="collapse" data-target="#ab5bbf933e7e5f24a63b8be77ca9878d" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="ab5bbf933e7e5f24a63b8be77ca9878d" class="list-group-item panel-collapse collapse"><div class="description"><p><code>currentPassword</code> is incorrect.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>410</code></strong><a data-toggle="collapse" data-target="#50a9148f2b2fbc6bbce0c336dd8d1463" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="50a9148f2b2fbc6bbce0c336dd8d1463" class="list-group-item panel-collapse collapse"><div class="description"><p>Session is invalid or expired.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>500</code></strong><a data-toggle="collapse" data-target="#e4bcfbdbbc6b76507c992a8065f67678" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="e4bcfbdbbc6b76507c992a8065f67678" class="list-group-item panel-collapse collapse"><div class="description"><p>Internal Server Error</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li></ul></section><h4 id="session-logout">Logout&nbsp;<a href="#session-logout"><i class="fa fa-link"></i></a></h4><section id="session-logout-post" class="panel panel-success"><div class="panel-heading"><div style="float:left"><a href="#session-logout-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/v0/logout</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>loginToken</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>From <code>login</code> or <code>refresh</code> API.</p>
+</dd><dt>all</dt><dd><code>boolean</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-info default"><strong>Default:&nbsp;</strong><span>false</span></span>&nbsp;<p>Whether or not to logout only this session (<code>false</code>, the default) or all sessions for this user (<code>true</code>).</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>204</code></strong><a data-toggle="collapse" data-target="#a3155bad04e1d27a823ee301200e73de" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="a3155bad04e1d27a823ee301200e73de" class="list-group-item panel-collapse collapse"><div class="description"><p>Logged out.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>400</code></strong><a data-toggle="collapse" data-target="#c281cc4bc08c304ee9e6e9f3c86e3367" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="c281cc4bc08c304ee9e6e9f3c86e3367" class="list-group-item panel-collapse collapse"><div class="description"><p>Missing or incorrect parameter(s).</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>410</code></strong><a data-toggle="collapse" data-target="#f0d0cb7ee83910c0b724a1846c9c717e" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="f0d0cb7ee83910c0b724a1846c9c717e" class="list-group-item panel-collapse collapse"><div class="description"><p>Session is invalid or expired.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>500</code></strong><a data-toggle="collapse" data-target="#0205658137a8aa13c657ab2fd0beb3ce" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="0205658137a8aa13c657ab2fd0beb3ce" class="list-group-item panel-collapse collapse"><div class="description"><p>Internal Server Error</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre></li></ul></section></div></div></div></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 13 Apr 2015</p><div id="localFile" style="display: none; position: absolute; top: 0; left: 0; width: 100%; color: white; background: red; font-size: 150%; text-align: center; padding: 1em;">This page may not display correctly when opened as a local file. Instead, view it from a web server.
+
+</div></body><script src="//code.jquery.com/jquery-1.11.0.min.js"></script><script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script>(function() {
+  if (location.protocol === 'file:') {
+    document.getElementById('localFile').style.display = 'block';
+  }
+
+}).call(this);
+</script><script>(function() {
+  $('table').addClass('table');
+
+}).call(this);
+</script></html>
