@@ -1,5 +1,10 @@
 @import "bower_components/bootstrap/less/bootstrap";
 
+@body-bg: #FDFFFE;
+@text-color: #01010B;
+@link-color: #55D3F9;
+@link-hover-color: #ED0131;
+
 body {
 	padding-top: (@line-height-computed * 4);
 }
@@ -14,3 +19,22 @@ p {
 	font-family: 'Josefin Slab', serif;
 }
 
+::selection {
+	background-color: #FC8108;
+}
+
+::-moz-selection {
+	background-color: #FC8108;
+}
+
+#hero {
+	margin-bottom: 4*@line-height-computed;
+}
+
+.navbar {
+	border-bottom-width: 0;
+}
+
+ul.navbar-nav li.active {
+	border-bottom: 4px solid #ED0131;
+}
